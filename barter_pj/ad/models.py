@@ -24,6 +24,9 @@ class Category(models.Model):
         verbose_name = 'категория'
         verbose_name_plural = 'Категории'
 
+    def __str__(self):
+        return self.name
+
 
 class Ad(models.Model):
     """Модель объявления"""
@@ -32,7 +35,7 @@ class Ad(models.Model):
         User,
         on_delete=models.CASCADE,
         related_name='ad',
-        verbose_name='Автор объявления'
+        verbose_name='Автор объявления',
     )
     title = models.CharField(
         'Заголовок объявления',
@@ -44,7 +47,8 @@ class Ad(models.Model):
     image_url = models.ImageField(
         upload_to='media/',
         verbose_name='URL изображения',
-        blank=True
+        blank=True,
+        null=True
     )
     category = models.ManyToManyField(
         Category,
@@ -65,6 +69,9 @@ class Ad(models.Model):
 
         verbose_name = 'объявление'
         verbose_name_plural = 'Объявления'
+
+    def __str__(self):
+        return self.title
 
 
 class ExchangeProposal(models.Model):
